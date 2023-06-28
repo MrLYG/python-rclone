@@ -4,12 +4,12 @@ import os
 
 PROJECT_NAME = 'pyrclone'
 if os.name == 'nt':  # Windows
-    rclone_binary = (f'lib\site-packages\{PROJECT_NAME}', ['win/rclone.exe'])
+    rclone_binary = (f'{PROJECT_NAME}', ['win/rclone.exe'])
 elif os.name == 'posix':  # Unix-like
     if os.uname().sysname == 'Linux':
-        rclone_binary = (f'lib\site-packages\{PROJECT_NAME}', ['linux/rclone'])
+        rclone_binary = (f'{PROJECT_NAME}', ['linux/rclone'])
     elif os.uname().sysname == 'Darwin':
-        rclone_binary = (f'lib\site-packages\{PROJECT_NAME}', ['mac/rclone'])
+        rclone_binary = (f'{PROJECT_NAME}', ['mac/rclone'])
 else:
     raise NotImplementedError('Unsupported OS')
 
