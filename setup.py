@@ -15,7 +15,7 @@ else:
 
 setuptools.setup(
     name="PyRCloneTest",
-    version="0.0.1-v1.62.2",
+    version="0.0.1",
     author="Yuangang Li",
     author_email="yuangangli@outlook.com",
     description="A package that provides a wrapper for RClone",
