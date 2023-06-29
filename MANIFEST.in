@@ -1,0 +1,3 @@
+global-exclude win
+global-exclude mac
+global-exclude linux
