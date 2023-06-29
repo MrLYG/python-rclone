@@ -1,6 +1,7 @@
 import logging
 import subprocess
 import os
+import sys
 
 
 class RCloneWrapper:
@@ -11,9 +12,9 @@ class RCloneWrapper:
         self.cfg = '\n'.join(f'[{name}]\n' + '\n'.join(f'{k} = {v}' for k,
                              v in settings.items()) for name, settings in cfg.items())
         self.log = logging.getLogger("RClone")
-        cur_dir = os.path.dirname(os.path.realpath(__file__))
-        self.config_path = os.path.join(cur_dir, "rclone.conf")
-        self.rclone_path = os.path.join(cur_dir, "rclone")
+        wrapper_dir = os.path.dirname(os.path.realpath(__file__))
+        self.config_path = os.path.join(wrapper_dir, "rclone.conf")
+        self.rclone_path = os.path.join(sys.prefix, "pyrclone", "rclone")
 
     def _execute(self, command_with_args):
         # print(command_with_args)
