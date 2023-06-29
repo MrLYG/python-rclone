@@ -23,9 +23,6 @@ jobs:
     - name: Update permissions
       run: |
         sudo chmod 755 /opt/hostedtoolcache/Python/3.10.12/x64/lib/python3.10/site-packages/pyrclone/rclone
-    - name: Update permissions
-      run: |
-        ls /opt/hostedtoolcache/Python/3.10.12/x64/lib/python3.10/site-packages/pyrclone
     - name: Test with pytest
       run: |
         make test
