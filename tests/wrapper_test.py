@@ -4,6 +4,8 @@ import tempfile
 import os
 import logging
 import json
+
+import pkg_resources
 from pyrclone.rclone_wrapper import RCloneWrapper
 import shutil
 
@@ -107,6 +109,9 @@ def test_rclone_sync(tmp_path: Path):
 
 
 if __name__ == "__main__":
+    data_path = pkg_resources.resource_filename('pyrclone', '*/rlcone.exe')
+    print(data_path)
+    print(data_path)
     tmp_path = Path("C:\\tmp\\rclone_test")
     # test rclone sync on local
     shutil.rmtree(tmp_path, ignore_errors=True)

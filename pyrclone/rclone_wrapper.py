@@ -3,18 +3,23 @@ import subprocess
 import os
 import sys
 
+import pkg_resources
+
 
 class RCloneWrapper:
     """
     Wrapper class for rclone.
     """
+
     def __init__(self, cfg):
         self.cfg = '\n'.join(f'[{name}]\n' + '\n'.join(f'{k} = {v}' for k,
                              v in settings.items()) for name, settings in cfg.items())
         self.log = logging.getLogger("RClone")
-        wrapper_dir = os.path.dirname(os.path.realpath(__file__))
-        self.config_path = os.path.join(wrapper_dir, "rclone.conf")
-        self.rclone_path = os.path.join(sys.prefix, "pyrclone", "rclone")
+
+        self.config_path = pkg_resources.resource_filename(
+            "pyrclone", "rclone.conf")
+        self.rclone_path = pkg_resources.resource_filename(
+            "pyrclone", "rclone")
 
     def _execute(self, command_with_args):
         # print(command_with_args)
@@ -115,4 +120,3 @@ class RCloneWrapper:
 
     def delete(self, dest, flags=[]):
         return self.run_cmd(command="delete", extra_args=[dest] + flags)
-

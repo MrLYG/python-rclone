@@ -1,4 +1,4 @@
-name: linux-test
+name: windows-test
 
 on:
   push:
@@ -6,7 +6,7 @@ on:
 
 jobs:
   pytest:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     steps:
     - uses: actions/checkout@v3
     - name: Set up Python 3.10
@@ -15,14 +15,11 @@ jobs:
         python-version: '3.10'
     - name: package install
       run: |
-        mv linux/rclone pyrclone/rclone
+        move ./win/rclone.exe ./pyrclone/rclone.exe
     - name: Install dependencies
       run: |
         pip install . -v
         pip install pytest
-    - name: Update permissions
-      run: |
-        sudo chmod 755 /opt/hostedtoolcache/Python/3.10.12/x64/lib/python3.10/site-packages/pyrclone/rclone
     - name: Test with pytest
       run: |
         make test
