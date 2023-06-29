@@ -24,12 +24,10 @@ jobs:
         sudo chmod 755 pyrclone/rclone
     - name: Build And Package for Linux
       run: |
-        make package OS="manylinux1_x86_64"
-    - name: Publish package
-      uses: pypa/gh-action-pypi-publish@27b31702a0e7fc50959f5ad993c78deac1bdfc29
-      with:
-        user: __token__
-        password: ${{ secrets.PYPI_API_TOKEN }}
+        make publish OS="manylinux1_x86_64"
+      env:
+        TWINE_USERNAME: ${{ secrets.PYPI_USERNAME }}
+        TWINE_PASSWORD: ${{ secrets.PYPI_PASSWORD }}
 
 
   build_and_publish_windows:
@@ -48,12 +46,10 @@ jobs:
         move win/rclone.exe pyrclone/rclone.exe
     - name: Build And Package for Windows
       run: |
-        make package OS="win_amd64"
-    - name: Publish package
-      uses: pypa/gh-action-pypi-publish@27b31702a0e7fc50959f5ad993c78deac1bdfc29
-      with:
-        user: __token__
-        password: ${{ secrets.PYPI_API_TOKEN }}
+        make publish OS="win_amd64"
+      env:
+        TWINE_USERNAME: ${{ secrets.PYPI_USERNAME }}
+        TWINE_PASSWORD: ${{ secrets.PYPI_PASSWORD }}
 
   build_and_publish_mac:
       runs-on: macos-latest
@@ -74,10 +70,8 @@ jobs:
           sudo chmod 755 pyrclone/rclone
       - name: Build And Package for Mac
         run: |
-          make package OS="macosx_10_9_x86_64"
-      - name: Publish package
-        uses: pypa/gh-action-pypi-publish@27b31702a0e7fc50959f5ad993c78deac1bdfc29
-        with:
-          user: __token__
-          password: ${{ secrets.PYPI_API_TOKEN }}
+          make publish OS="macosx_10_9_x86_64"
+        env:
+          TWINE_USERNAME: ${{ secrets.PYPI_USERNAME }}
+          TWINE_PASSWORD: ${{ secrets.PYPI_PASSWORD }}
 
