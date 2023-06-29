@@ -15,7 +15,7 @@ jobs:
         python-version: '3.10'
     - name: package install
       run: |
-        move ./win/rclone ./pyrclone/rclone
+        move ./win/rclone.exe ./pyrclone/rclone.exe
     - name: Install dependencies
       run: |
         pip install . -v
