@@ -17,9 +17,6 @@ jobs:
       run: |
         pip install . -v
         pip install pytest
-    - name: Update permissions
-      run: |
-        sudo chmod 755 /opt/hostedtoolcache/Python/3.10.12/x64/pyrclone/rclone
     - name: Test with pytest
       run: |
         make test

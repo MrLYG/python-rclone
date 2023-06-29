@@ -2,14 +2,26 @@ import setuptools
 import os
 
 
+# PROJECT_NAME = 'pyrclone'
+# if os.name == 'nt':  # Windows
+#     rclone_binary = (f'{PROJECT_NAME}', ['win/rclone.exe'])
+# elif os.name == 'posix':  # Unix-like
+#     if os.uname().sysname == 'Linux':
+#         rclone_binary = (f'{PROJECT_NAME}', ['linux/rclone'])
+#     elif os.uname().sysname == 'Darwin':
+#         rclone_binary = (f'{PROJECT_NAME}', ['mac/rclone'])
+# else:
+#     raise NotImplementedError('Unsupported OS')
+
+
 PROJECT_NAME = 'pyrclone'
 if os.name == 'nt':  # Windows
-    rclone_binary = (f'{PROJECT_NAME}', ['win/rclone.exe'])
+    rclone_binary = ['win/rclone.exe']
 elif os.name == 'posix':  # Unix-like
     if os.uname().sysname == 'Linux':
-        rclone_binary = (f'{PROJECT_NAME}', ['linux/rclone'])
+        rclone_binary =  ['linux/rclone']
     elif os.uname().sysname == 'Darwin':
-        rclone_binary = (f'{PROJECT_NAME}', ['mac/rclone'])
+        rclone_binary = ['mac/rclone']
 else:
     raise NotImplementedError('Unsupported OS')
 
@@ -23,7 +35,10 @@ setuptools.setup(
     long_description_content_type="text/markdown",
     url="https://github.com/MrLYG/python-rclone.git",
     packages=setuptools.find_packages(),
-    data_files=[(rclone_binary)],
+    package_data={
+        # If any package contains *.bin files, include them:
+        'pyrclone': rclone_binary,
+    },
     classifiers=[
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: MIT License",
