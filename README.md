@@ -90,7 +90,7 @@ darwin(mac): amd64, x86_64
 ## Developer guide
 
 ```bash
-$ pip install twine pytest
+$ pip install wheel twine pytest
 $ make test
 ```
 
