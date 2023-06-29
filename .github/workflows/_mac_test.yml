@@ -19,7 +19,7 @@ jobs:
     - name: Install dependencies
       run: |
         pip install . -v
-        pip install
+        pip install pytest
     - name: Update permissions
       run: |
         sudo chmod 755 /Users/runner/hostedtoolcache/Python/3.10.12/x64/pyrclone/rclone
