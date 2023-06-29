@@ -26,7 +26,7 @@ else:
     raise NotImplementedError('Unsupported OS')
 
 setuptools.setup(
-    name="PyRCloneTest",
+    name="pyrclone",
     version="0.0.1",
     author="Yuangang Li",
     author_email="yuangangli@outlook.com",
