@@ -13,15 +13,15 @@ else:
     raise NotImplementedError('Unsupported OS')
 
 setuptools.setup(
-    name="PyRClone",
-    version="0.0.1",
+    name="pyrclonetest",
+    version="0.0.7",
     author="Yuangang Li",
     author_email="yuangangli@outlook.com",
     description="A package that provides a wrapper for RClone",
     long_description=open('README.md').read(),
     long_description_content_type="text/markdown",
     url="https://github.com/MrLYG/python-rclone.git",
-    packages=setuptools.find_packages(exclude=('mac', 'win','linux')),
+    packages=setuptools.find_packages(exclude=('mac', 'win', 'linux')),
     include_package_data=True,
     package_data={
         'pyrclone': rclone_binary,

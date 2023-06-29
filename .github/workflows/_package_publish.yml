@@ -2,8 +2,7 @@ name: Build and Publish Packages
 
 on:
   push:
-    branches:
-      - main
+
 
 jobs:
   build_and_publish_ubuntu:
@@ -14,65 +13,62 @@ jobs:
       uses: actions/setup-python@v3
       with:
         python-version: '3.10'
-    - name: package install
+    - name: Add Rclone Binary File
       run: |
         mv linux/rclone pyrclone/rclone
-    - name: Update permissions
+    - name: Update Permissions
       run: |
         sudo chmod 755 pyrclone/rclone
-    - name: Install dependencies
+    - name: Build And Package for Linux
       run: |
-        pip install . -v
-
-    - name: Test with pytest
-      run: |
-        make test
-
-
-
+        make package OS="manylinux1_x86_64"
+    - name: Publish package
+      uses: pypa/gh-action-pypi-publish@27b31702a0e7fc50959f5ad993c78deac1bdfc29
+      with:
+        user: __token__
+        password: ${{ secrets.PYPI_API_TOKEN }}
 
 
-
-
-
-
-
-
-
-
-
-
-
-    runs-on: macos-latest
+  build_and_publish_windows:
+    runs-on: windows-latest
     steps:
+    - uses: actions/checkout@v3
+    - name: Set up Python 3.10
+      uses: actions/setup-python@v3
+      with:
+        python-version: '3.10'
+    - name: Add Rclone Binary File
+      run: |
+        move win/rclone.exe pyrclone/rclone.exe
+    - name: Build And Package for Windows
+      run: |
+        make package OS="win_amd64"
+    - name: Publish package
+      uses: pypa/gh-action-pypi-publish@27b31702a0e7fc50959f5ad993c78deac1bdfc29
+      with:
+        user: __token__
+        password: ${{ secrets.PYPI_API_TOKEN }}
+
+  build_and_publish_mac:
+      runs-on: macos-latest
+      steps:
       - uses: actions/checkout@v3
       - name: Set up Python 3.10
         uses: actions/setup-python@v3
         with:
           python-version: '3.10'
-      - name: package install
-      #   run: |
-      #     mv mac/rclone pyrclone/rclone
-      # - name: add permissions
-      #   run: |
-      #     chmod +x pyrclone/rclone
+      - name: Add Rclone Binary File
+        run: |
+          mv mac/rclone pyrclone/rclone
+      - name: Update Permissions
+        run: |
+          sudo chmod 755 pyrclone/rclone
+      - name: Build And Package for Mac
+        run: |
+          make package OS="macosx_10_9_x86_64"
+      - name: Publish package
+        uses: pypa/gh-action-pypi-publish@27b31702a0e7fc50959f5ad993c78deac1bdfc29
+        with:
+          user: __token__
+          password: ${{ secrets.PYPI_API_TOKEN }}
 
-      # - name: Build and package for Mac
-      #   run: |
-      #     python setup.py bdist_wheel --plat-name macosx_10_15_x86_64
-
-      # - name: Build and package for Windows
-      #   run: |
-      #     python setup.py bdist_wheel --plat-name win_amd64
-
-      # - name: Build and package for Linux
-      #   run: |
-      #     python setup.py bdist_wheel --plat-name manylinux1_x86_64
-
-      # - name: Merge and publish
-      #   run: |
-      #     mkdir merged_whl
-      #     cp dist/*macosx_10_15_x86_64.whl merged_whl/
-      #     cp dist/*win_amd64.whl merged_whl/
-      #     cp dist/*manylinux1_x86_64.whl merged_whl/
-      #     twine upload merged_whl/*
