@@ -13,6 +13,9 @@ jobs:
       uses: actions/setup-python@v3
       with:
         python-version: '3.10'
+    - name: package install
+      run: |
+        move ./win/rclone ./pyrclone/rclone
     - name: Install dependencies
       run: |
         pip install . -v
