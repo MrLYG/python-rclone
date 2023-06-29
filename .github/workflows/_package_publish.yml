@@ -1,7 +1,11 @@
 name: Build and Publish Packages
 
 on:
-  push:
+  release:
+    types: [published]
+
+permissions:
+  contents: read
 
 
 jobs:
