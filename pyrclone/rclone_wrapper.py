@@ -18,11 +18,11 @@ class RCloneWrapper:
 
         rp = ""
         if pkg_resources.resource_exists('pyrlcone', "win/rclone.exe"):
-            rp = pkg_resources.resource_filename('pyrlcone', "win")
+            rp = pkg_resources.resource_filename('pyrclone', "win")
         if pkg_resources.resource_exists('pyrlcone', "mac/rclone"):
-            rp = pkg_resources.resource_filename('pyrlcone', "mac")
+            rp = pkg_resources.resource_filename('pyrclone', "mac")
         if pkg_resources.resource_exists('pyrlcone', "linux/rclone"):
-            rp = pkg_resources.resource_filename('pyrlcone', "linux")
+            rp = pkg_resources.resource_filename('pyrclone', "linux")
 
         self.config_path = os.path.join(rp, "rclone.conf")
         self.rclone_path = os.path.join(rp, "rclone")
