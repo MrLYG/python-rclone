@@ -13,8 +13,8 @@ else:
     raise NotImplementedError('Unsupported OS')
 
 setuptools.setup(
-    name="pyrclonetest",
-    version="0.0.7",
+    name="pyrclone-wrapper",
+    version="0.0.1",
     author="Yuangang Li",
     author_email="yuangangli@outlook.com",
     description="A package that provides a wrapper for RClone",

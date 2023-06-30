@@ -1,16 +1,16 @@
 # PyRCLONE
 A Python wrapper for rclone.
 
-No need to install rclone separately as it is already included in this package. The binary file for version v1.62.2 is available for different operating systems including Windows, Mac, and Linux, as well as arch with amd64 and x86_64.
+This package, available on PyPI, conveniently includes the rclone binary (version v1.62.2) **eliminating the need for pre-installation of rclone**. It caters to various operating systems like Windows, Mac, and Linux, and supports both amd64 and x86_64 architectures. When a user downloads the package, the appropriate rclone binary file is installed based on their system type.
 
 ## Install
 ```python
-pip install pyrclonetest
+pip install pyrclone-wrapper
 ```
 
 ## Usage
 ```python
-from pyrclone.rclone_wrapper import RCloneWrapper
+from pyrclone import RCloneWrapper
 
 
 config = {
@@ -46,7 +46,7 @@ print(result.get('error'))
 Even if not all `rclone` commands have been exposed, it's possible to invoke any command using `run_cmd` method directly, as shown in the example bellow:
 
 ```python
-from pyrclone.rclone_wrapper import RCloneWrapper
+from pyrclone import RCloneWrapper
 
 config = {
     "local": {
@@ -66,7 +66,7 @@ logging.basicConfig(
     level=logging.DEBUG,
     format="%(asctime)s %(name)s [%(levelname)s]: %(message)s")
 
-from pyrclone.rclone_wrapper import RCloneWrapper
+from pyrclone import RCloneWrapper
 
 config = {
     "local": {
@@ -95,8 +95,9 @@ $ make test
 ```
 
 ## Reference
-https://github.com/ddragosd/python-rclone (base on this project and improve it)
+[python-rclone](https://github.com/ddragosd/python-rclone) ( base on this project and improve it )
 
+[rclone](https://rclone.org/)
 
 
 
