@@ -1,0 +1,81 @@
+name: Build and Publish Packages
+
+on:
+  release:
+    types: [published]
+
+permissions:
+  contents: read
+
+
+jobs:
+  build_and_publish_ubuntu:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up Python 3.10
+      uses: actions/setup-python@v3
+      with:
+        python-version: '3.10'
+    - name: Dependencies
+      run: |
+        pip install wheel twine
+    - name: Add Rclone Binary File
+      run: |
+        mv linux/rclone pyrclone/rclone
+    - name: Update Permissions
+      run: |
+        sudo chmod 755 pyrclone/rclone
+    - name: Build And Package for Linux
+      run: |
+        make publish OS="manylinux1_x86_64"
+      env:
+        TWINE_USERNAME: ${{ secrets.PYPI_USERNAME }}
+        TWINE_PASSWORD: ${{ secrets.PYPI_PASSWORD }}
+
+
+  build_and_publish_windows:
+    runs-on: windows-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up Python 3.10
+      uses: actions/setup-python@v3
+      with:
+        python-version: '3.10'
+    - name: Dependencies
+      run: |
+        pip install wheel twine
+    - name: Add Rclone Binary File
+      run: |
+        move win/rclone.exe pyrclone/rclone.exe
+    - name: Build And Package for Windows
+      run: |
+        make publish OS="win_amd64"
+      env:
+        TWINE_USERNAME: ${{ secrets.PYPI_USERNAME }}
+        TWINE_PASSWORD: ${{ secrets.PYPI_PASSWORD }}
+
+  build_and_publish_mac:
+      runs-on: macos-latest
+      steps:
+      - uses: actions/checkout@v3
+      - name: Set up Python 3.10
+        uses: actions/setup-python@v3
+        with:
+          python-version: '3.10'
+      - name: Dependencies
+        run: |
+          pip install wheel twine
+      - name: Add Rclone Binary File
+        run: |
+          mv mac/rclone pyrclone/rclone
+      - name: Update Permissions
+        run: |
+          sudo chmod 755 pyrclone/rclone
+      - name: Build And Package for Mac
+        run: |
+          make publish OS="macosx_10_9_x86_64"
+        env:
+          TWINE_USERNAME: ${{ secrets.PYPI_USERNAME }}
+          TWINE_PASSWORD: ${{ secrets.PYPI_PASSWORD }}
+

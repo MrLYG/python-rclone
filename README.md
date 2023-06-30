@@ -5,7 +5,7 @@ No need to install rclone separately as it is already included in this package. 
 
 ## Install
 ```python
-pip install pyrclone
+pip install pyrclonetest
 ```
 
 ## Usage
@@ -90,7 +90,7 @@ darwin(mac): amd64, x86_64
 ## Developer guide
 
 ```bash
-$ pip install .[dev]
+$ pip install wheel twine pytest
 $ make test
 ```
 
